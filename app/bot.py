@@ -1,15 +1,18 @@
 # imports
-import asyncio
-from telebot.async_telebot import AsyncTeleBot
-from config import apiKey
+import os
+import telebot
+from dotenv import load_dotenv
 
 # configurations
-bot=AsyncTeleBot(apiKey)
+load_dotenv()
+apiKey = os.getenv('api_key')
+bot=telebot.TeleBot(apiKey)
 
 # bot app
-@bot.message_handler(commands=['start', 'help'])
-async def send_welcome(message):
-    await bot.reply_to(message, "Howdy, how are you doing?")
+@bot.message_handler(commands=['start'])
+def welcome_message(message):
+    username = message.chat.username
+    bot.send_message(message.chat.id, 'Hello, {}, my name is Samuel, Doghor, How may I help you?'.format(username))
 
 # run
-asyncio.run(bot.infinity_polling())
+bot.infinity_polling()
