@@ -15,7 +15,7 @@ dbPassword = os.getenv('db_password')
 dbPort = os.getenv('db_port')
 dbHost = os.getenv('db_host')
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://{dbUsername}:{dbPassword}@{dbHost}/{dbName}'
+SQLALCHEMY_DATABASE_URI = f'postgresql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'
 
 # Application configs
 secretKey = os.getenv("secret_key")

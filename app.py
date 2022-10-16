@@ -10,11 +10,8 @@ from models import User, db_setup
 bot = telebot.TeleBot(config.apiKey)
 app = Flask(__name__)
 
-
 # db.init_app(app)
 db_setup(app)
-
-
 
 # flask
 @app.route('/')
@@ -24,6 +21,7 @@ def index():
 # bot
 @bot.message_handler(commands=['start'])
 def start(message):
+    # bot.send_message(message.chat.id, "Hello")
     username = message.chat.username
     user_name = User.query.filter_by(user_name=username).one()
     
